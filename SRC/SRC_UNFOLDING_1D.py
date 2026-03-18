@@ -543,37 +543,6 @@ def main_unfold_1D_brute(dPHI_meas, dPHI, S, G_matrix, group, N, output_dir, cas
         if valid_solution_BRUTE:
             break  # Exit the outer loop
 
-#        for subset in combinations(atom_keys, num_source):
-#            if iter_BRUTE % (20 * num_atoms) == 0:
-#                print(f"Iteration = {iter_BRUTE}, subset progress = {(iter_BRUTE/len(list(combinations(atom_keys, num_source)))*100):.2f}%, subsets = {subset}")
-#
-#            # Form the initial matrix with the subset
-#            A = np.column_stack([G_dictionary_sampled[k] for k in subset]) #A = np.array([G_dictionary_sampled[k] for k in subset]).T
-#            try:
-#                coeffs, _, _, _ = lstsq(A, dPHI_meas)
-#            except Exception as e:
-#                print(f"lstsq failed for subset {subset}: {e}")
-#                continue
-#            residual = dPHI_meas - A @ coeffs
-#            residual_norm = np.linalg.norm(residual)
-#
-#            # Check if residual norm meets tolerance
-#            if residual_norm < tol:
-#                print(f'Subsets {subset} pass the residual tolerance')
-#                valid_solution_BRUTE = True  # Criterion satisfied
-#                print(f"Valid solution found with number of sources = {num_source} and atoms = {subset}.")
-#                coefficients = dict(zip(subset, coeffs))
-#                dPHI_BRUTE = sum(c * G_dictionary[k] for k, c in zip(subset, coeffs))
-#                break  # Exit the outer loop
-#
-#            if valid_solution_BRUTE:
-#                break  # Exit the subset loop
-#
-#            iter_BRUTE += 1
-#
-#        if valid_solution_BRUTE:
-#            break  # Exit the outer loop
-
     ###################################################################################################
     if valid_solution_BRUTE:
         # Reshape reconstructed signal

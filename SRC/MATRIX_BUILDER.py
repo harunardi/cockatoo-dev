@@ -1,4 +1,4 @@
-from SRC.XSPROCESS_1D_RECT import *
+from SRC.XSPROCESS_1D import *
 from SRC.XSPROCESS_2D_RECT import *
 from SRC.XSPROCESS_2D_HEXX import *
 from SRC.XSPROCESS_3D_RECT import *
