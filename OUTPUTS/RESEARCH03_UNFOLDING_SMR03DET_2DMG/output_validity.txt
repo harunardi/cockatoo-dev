@@ -1,0 +1,2 @@
+SCAN yes, no, no, no, no, no, no, no, no, no
+GREEDY_OPTIMIZED yes, yes, yes, yes, yes, yes, yes, yes, no, no

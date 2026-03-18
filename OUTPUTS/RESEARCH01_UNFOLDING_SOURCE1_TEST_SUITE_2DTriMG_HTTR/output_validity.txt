@@ -1,0 +1,9 @@
+INVERT 
+ZONE 
+SCAN yes, yes, yes, yes, yes, yes, yes, yes, yes, yes
+BRUTE 
+BACK 
+GREEDY yes, yes, yes, yes, yes, yes, yes, yes, yes, yes
+GREEDY_new 
+GREEDY_new2 
+GREEDY_optimized yes, yes, yes, yes, yes, yes, yes, yes, yes, yes

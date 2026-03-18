@@ -1,0 +1,20 @@
+Iteration: 1, num_source: 1, loc_conv = [966], loc = [1241], frequency: 1, Real magnitude = [0.04], Imaginary magnitude = [0.03]
+	Timing: Green=21.536184s, SCAN=341.759437s, GREEDY_OPTIMIZED=72.186318s, Total_iter=460.324289s
+Iteration: 2, num_source: 2, loc_conv = [65, 106], loc = [132, 181], frequency: 1, Real magnitude = [0.08, 0.09], Imaginary magnitude = [0.0, 0.0]
+	Timing: Green=20.626209s, SCAN=239.088330s, GREEDY_OPTIMIZED=131.260018s, Total_iter=397.049970s
+Iteration: 3, num_source: 3, loc_conv = [875, 519, 113], loc = [1106, 614, 196], frequency: 1, Real magnitude = [0.04, 0.01, 0.04], Imaginary magnitude = [0.0, 0.0, 0.0]
+	Timing: Green=18.088452s, SCAN=390.942389s, GREEDY_OPTIMIZED=440.192799s, Total_iter=855.043812s
+Iteration: 4, num_source: 4, loc_conv = [208, 513, 1646, 662], loc = [303, 608, 2005, 757], frequency: 1, Real magnitude = [0.07, 0.01, 0.07, 0.04], Imaginary magnitude = [0.0, 0.02, 0.0, 0.02]
+	Timing: Green=29.142557s, SCAN=359.612688s, GREEDY_OPTIMIZED=446.817083s, Total_iter=849.299828s
+Iteration: 5, num_source: 5, loc_conv = [506, 112, 1471, 1338, 451], loc = [601, 187, 1758, 1625, 546], frequency: 1, Real magnitude = [0.09, 0.09, 0.07, 0.06, 0.09], Imaginary magnitude = [0.0, 0.07, 0.0, 0.05, 0.0]
+	Timing: Green=20.692340s, SCAN=329.815365s, GREEDY_OPTIMIZED=415.236342s, Total_iter=774.267139s
+Iteration: 6, num_source: 6, loc_conv = [717, 382, 1387, 455, 529, 1309], loc = [824, 477, 1674, 550, 624, 1596], frequency: 1, Real magnitude = [0.08, 0.06, 0.1, 0.07, 0.07, 0.09], Imaginary magnitude = [0.0, 0.02, 0.0, 0.0, 0.0, 0.0]
+	Timing: Green=20.019327s, SCAN=234.679234s, GREEDY_OPTIMIZED=1122.196855s, Total_iter=1382.605005s
+Iteration: 7, num_source: 7, loc_conv = [85, 1606, 1449, 272, 1095, 889, 1543], loc = [152, 1933, 1736, 367, 1382, 1136, 1842], frequency: 1, Real magnitude = [0.03, 0.05, 0.1, 0.04, 0.07, 0.09, 0.01], Imaginary magnitude = [0.1, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0]
+	Timing: Green=14.839184s, SCAN=234.440280s, GREEDY_OPTIMIZED=596.970301s, Total_iter=851.677673s
+Iteration: 8, num_source: 8, loc_conv = [1659, 1134, 582, 1416, 521, 391, 694, 659], loc = [2034, 1421, 677, 1703, 616, 486, 793, 754], frequency: 1, Real magnitude = [0.1, 0.01, 0.03, 0.09, 0.01, 0.06, 0.05, 0.03], Imaginary magnitude = [0.0, 0.08, 0.03, 0.0, 0.0, 0.0, 0.0, 0.0]
+	Timing: Green=16.916330s, SCAN=227.015064s, GREEDY_OPTIMIZED=2383.780443s, Total_iter=2633.645204s
+Iteration: 9, num_source: 9, loc_conv = [935, 1477, 831, 20, 835, 1431, 630, 1394, 941], loc = [1202, 1764, 1014, 43, 1034, 1718, 725, 1681, 1208], frequency: 1, Real magnitude = [0.03, 0.02, 0.07, 0.06, 0.01, 0.02, 0.02, 0.01, 0.04], Imaginary magnitude = [0.03, 0.0, 0.04, 0.0, 0.0, 0.0, 0.02, 0.0, 0.0]
+	Timing: Green=22.823986s, SCAN=257.641451s, GREEDY_OPTIMIZED=1001.591321s, Total_iter=1293.266545s
+Iteration: 10, num_source: 10, loc_conv = [187, 20, 971, 786, 619, 1108, 155, 411, 1242, 887], loc = [282, 43, 1254, 937, 714, 1395, 246, 506, 1529, 1134], frequency: 1, Real magnitude = [0.1, 0.08, 0.08, 0.09, 0.01, 0.03, 0.1, 0.04, 0.06, 0.07], Imaginary magnitude = [0.0, 0.0, 0.0, 0.09, 0.0, 0.05, 0.04, 0.0, 0.0, 0.0]
+	Timing: Green=19.098591s, SCAN=253.508314s, GREEDY_OPTIMIZED=1715.331678s, Total_iter=1995.556776s

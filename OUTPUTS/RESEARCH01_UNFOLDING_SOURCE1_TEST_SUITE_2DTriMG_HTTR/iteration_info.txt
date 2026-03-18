@@ -1,0 +1,20 @@
+Iteration: 1, num_source: 1, loc_conv = [1425], loc = [2390], frequency: 0.01, Real magnitude = [0.04], Imaginary magnitude = [0.0]
+	Timing: Green=12.158751s, SCAN=8.190923s, GREEDY=358.940649s, GREEDY_OPTIMIZED=26.483598s, Total_iter=418.587262s
+Iteration: 2, num_source: 1, loc_conv = [355], loc = [648], frequency: 0.021544346900318832, Real magnitude = [0.02], Imaginary magnitude = [0.0]
+	Timing: Green=30.942578s, SCAN=5.879431s, GREEDY=336.755397s, GREEDY_OPTIMIZED=9.155068s, Total_iter=391.645098s
+Iteration: 3, num_source: 1, loc_conv = [1460], loc = [2461], frequency: 0.046415888336127774, Real magnitude = [0.02], Imaginary magnitude = [0.0]
+	Timing: Green=12.883072s, SCAN=4.510929s, GREEDY=307.601138s, GREEDY_OPTIMIZED=12.576637s, Total_iter=343.950291s
+Iteration: 4, num_source: 1, loc_conv = [1089], loc = [1958], frequency: 0.1, Real magnitude = [0.04], Imaginary magnitude = [0.0]
+	Timing: Green=14.466424s, SCAN=4.414044s, GREEDY=314.556058s, GREEDY_OPTIMIZED=9.759053s, Total_iter=350.118286s
+Iteration: 5, num_source: 1, loc_conv = [357], loc = [650], frequency: 0.21544346900318834, Real magnitude = [0.09], Imaginary magnitude = [0.0]
+	Timing: Green=12.537499s, SCAN=4.944621s, GREEDY=317.320032s, GREEDY_OPTIMIZED=10.034248s, Total_iter=351.840513s
+Iteration: 6, num_source: 1, loc_conv = [1428], loc = [2393], frequency: 0.46415888336127775, Real magnitude = [0.05], Imaginary magnitude = [0.07]
+	Timing: Green=12.964223s, SCAN=4.923994s, GREEDY=321.568525s, GREEDY_OPTIMIZED=10.994284s, Total_iter=357.253693s
+Iteration: 7, num_source: 1, loc_conv = [655], loc = [1032], frequency: 1.0, Real magnitude = [0.06], Imaginary magnitude = [0.03]
+	Timing: Green=12.838842s, SCAN=4.515660s, GREEDY=322.222630s, GREEDY_OPTIMIZED=9.823113s, Total_iter=356.336310s
+Iteration: 8, num_source: 1, loc_conv = [1412], loc = [2377], frequency: 2.154434690031882, Real magnitude = [0.04], Imaginary magnitude = [0.0]
+	Timing: Green=30.619509s, SCAN=4.868090s, GREEDY=316.907360s, GREEDY_OPTIMIZED=8.945890s, Total_iter=368.290686s
+Iteration: 9, num_source: 1, loc_conv = [947], loc = [1774], frequency: 4.6415888336127775, Real magnitude = [0.02], Imaginary magnitude = [0.1]
+	Timing: Green=30.985312s, SCAN=4.782054s, GREEDY=387.014245s, GREEDY_OPTIMIZED=9.604680s, Total_iter=439.291076s
+Iteration: 10, num_source: 1, loc_conv = [722], loc = [1177], frequency: 10.0, Real magnitude = [0.09], Imaginary magnitude = [0.0]
+	Timing: Green=34.392826s, SCAN=5.029834s, GREEDY=333.563374s, GREEDY_OPTIMIZED=13.844994s, Total_iter=394.329771s

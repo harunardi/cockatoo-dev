@@ -1,0 +1,15 @@
+OUTPUTS/TASK*/
+SRC/ARCHIEVE*
+ARCHIEVE*
+*.h5
+*_subset_residuals.txt
+*.json
+.DS_Store
+THESIS/acronyms.aux
+THESIS/dissertation.aux
+THESIS/dissertation.bbl
+THESIS/dissertation.blg
+THESIS/dissertation.log
+THESIS/dissertation.out
+THESIS/dissertation.synctex.gz
+THESIS/dissertation.fls
