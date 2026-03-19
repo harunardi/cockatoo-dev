@@ -11,9 +11,9 @@ from SRC.METHODS import FixedSourceSolver3DHexx
 
 class SolverFactory:
     @staticmethod
-    def get_solver_power1D(solver_type, group, N, M, F, x, precond, tol):
+    def get_solver_power1D(solver_type, group, N, M, F, x, precond, tol, eigenmodes=1):
         if solver_type in ['forward', 'adjoint']:
-            return PowerMethodSolver1D(group, N, M, F, x, precond, tol)
+            return PowerMethodSolver1D(group, N, M, F, x, precond, tol, eigenmodes)
         else:
             raise ValueError(f"Unknown solver type: {solver_type}")
 

@@ -25,5 +25,5 @@ Cockatoo is a forward, adjoint, and neutron noise general tool that solves neutr
 [coming soon]
 
 # NOTE: Required libraries to run the codes
-    conda create --name noise numpy scipy matplotlib shapely h5py petsc4py -c conda-forge
+    conda create --name noise numpy scipy matplotlib shapely h5py petsc4py slepc4py -c conda-forge
     conda install -c conda-forge 'petsc=*=complex*' petsc4py

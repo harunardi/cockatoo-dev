@@ -2,9 +2,10 @@ import numpy as np
 from scipy.sparse.linalg import spilu, LinearOperator, spsolve, gmres, splu, cg
 from scipy.integrate import trapezoid
 from petsc4py import PETSc
+from slepc4py import SLEPc
 
 class PowerMethodSolver1D:
-    def __init__(self, group, N, M, F, x, precond, tol=1e-06):
+    def __init__(self, group, N, M, F, x, precond, tol=1e-06, eigenmodes=1):
         self.group = group
         self.N = N
         self.M = M
@@ -12,8 +13,15 @@ class PowerMethodSolver1D:
         self.x = x
         self.precond = precond
         self.tol = tol
+        self.eigenmodes = eigenmodes
 
     def solve(self):
+        if self.eigenmodes == 1:
+            return self._solve_power_iteration()
+        else:
+            return self._solve_eigenmodes_slepc()
+
+    def _solve_power_iteration(self):
         phi = np.ones(self.group * self.N)
         keff = 1.0
         errflux = errkeff = self.tol + 1
@@ -62,6 +70,64 @@ class PowerMethodSolver1D:
             iter_count += 1
             print(f'Iteration: {iter_count}, keff = {keff:.5f}, errkeff = {errkeff:.6e}, '
                   f'errflux = {errflux:.5e}, residual = {residual_norm:.5e}')
+
+        return keff, phi
+    
+    @staticmethod
+    def scipy_to_petsc(A):
+        A = A.tocsr()
+        mat = PETSc.Mat().createAIJ(
+            size=A.shape,
+            csr=(A.indptr, A.indices, A.data)
+        )
+        mat.assemble()
+        return mat
+    
+    def _solve_eigenmodes_slepc(self):
+        # Convert matrices
+        A = self.scipy_to_petsc(self.F)  # F
+        B = self.scipy_to_petsc(self.M)  # M   
+
+        # Create eigenvalue solver
+        eps = SLEPc.EPS().create()
+        eps.setOperators(A, B)
+        eps.setProblemType(SLEPc.EPS.ProblemType.GNHEP)   
+        eps.setType(SLEPc.EPS.Type.KRYLOVSCHUR)   
+
+        eps.setDimensions(self.eigenmodes)
+        eps.setWhichEigenpairs(SLEPc.EPS.Which.LARGEST_REAL)        
+
+        eps.setTolerances(tol=self.tol)
+        eps.solve()     
+
+        nconv = eps.getConverged()
+        if nconv < self.eigenmodes:
+            print(f"Warning: only {nconv} eigenmodes converged")        
+
+        keff = np.zeros(nconv, dtype=complex)
+        lamda = np.zeros(nconv, dtype=complex)
+        phi = np.zeros((nconv, self.group * self.N), dtype=complex)        
+
+        for i in range(nconv):
+            eigval = eps.getEigenvalue(i)
+            keff[i] = eigval
+            lamda[i] = 1/eigval
+            print(f"Eigenmode {i}: keff = {keff[i]:.5f}, |eigval| = {abs(eigval):.5e}")
+
+            v = A.createVecRight()
+            eps.getEigenvector(i, v)
+
+            arr = v.getArray()
+            phi_i = arr.copy()
+
+            v.destroy()
+
+            phi_i /= np.max(np.abs(phi_i))  # normalize
+            phi[i, :] = phi_i 
+
+        eps.destroy()
+        A.destroy()
+        B.destroy()      
 
         return keff, phi
 
