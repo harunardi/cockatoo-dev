@@ -41,7 +41,7 @@ v1 = 18230400
 v2 = 413067
 
 # INITIALIZATION
-case_name = "RESEARCH02_DSM_1DMG"
+case_name = "RESEARCH04_UNFOLDING_MODAL_1DMG"
 dx = 0.05
 x = X_NUM
 N = len(D1)
@@ -106,12 +106,16 @@ M, F = matrix_builder.build_forward_matrices()
 solver = SolverFactory.get_solver_power1D(solver_type, group, N, M, F, x, precond, tol=1E-10, eigenmodes=1)
 keff, PHI = solver.solve()
 
-## Post-processing
-#PHI_reshaped = np.reshape(PHI, (group, N))
-#PostProcessor.save_output_power1D(output_dir, case_name, keff, PHI_reshaped, solver_type)
-#for g in range(group):
-#    Utils.plot_1D_power(solver_type, PHI_reshaped[g], x, g, output_dir=output_dir, varname=f'PHI', case_name=case_name, title=f'1D Plot of PHI{g+1}')
-#
+# Post-processing
+dim = len(PHI)
+
+for d in range(dim):
+    keff_fun = keff[d].real
+    PHI_reshaped = np.reshape(PHI[d], (group, N))
+    PostProcessor.save_output_power1D(output_dir, case_name, keff_fun, PHI_reshaped, solver_type)
+    for g in range(group):
+        Utils.plot_1D_power(solver_type, PHI_reshaped[g].real, x, g, output_dir=output_dir, varname=f'PHI_mode{d}', case_name=case_name, title=f'1D Plot of PHI{g+1}')
+    
 ########################################################################################################
 ## NOISE SIMULATION
 #solver_type = 'noise'
@@ -135,7 +139,7 @@ keff, PHI = solver.solve()
 #matrix_builder = MatrixBuilderNoise1D(group, N, TOT, SIGS, BC, dx, D, chi, NUFIS, keff, v, Beff, omega, l, dTOT, dSIGS, dNUFIS)
 #M, dS = matrix_builder.build_noise_matrices()
 #
-## Solve
+##Solve
 #solver = SolverFactory.get_solver_fixed1D(solver_type, group, N, M, dS, dSOURCE, PHI, precond, tol=1e-10)
 #dPHI = solver.solve()
 #

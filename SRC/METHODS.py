@@ -88,30 +88,33 @@ class PowerMethodSolver1D:
         A = self.scipy_to_petsc(self.F)  # F
         B = self.scipy_to_petsc(self.M)  # M   
 
+        # Note that this function solves keff*M*phi = F*phi, which is the generalized eigenvalue problem we want to solve.
+
         # Create eigenvalue solver
         eps = SLEPc.EPS().create()
         eps.setOperators(A, B)
         eps.setProblemType(SLEPc.EPS.ProblemType.GNHEP)   
         eps.setType(SLEPc.EPS.Type.KRYLOVSCHUR)   
 
-        eps.setDimensions(self.eigenmodes)
-        eps.setWhichEigenpairs(SLEPc.EPS.Which.LARGEST_REAL)        
+        eps.setDimensions(nev=self.eigenmodes)
+        eps.setWhichEigenpairs(SLEPc.EPS.Which.LARGEST_MAGNITUDE)        
 
         eps.setTolerances(tol=self.tol)
         eps.solve()     
-
+       
+        nev = self.eigenmodes
         nconv = eps.getConverged()
+        nret = min(nev, nconv)
+
         if nconv < self.eigenmodes:
             print(f"Warning: only {nconv} eigenmodes converged")        
 
-        keff = np.zeros(nconv, dtype=complex)
-        lamda = np.zeros(nconv, dtype=complex)
-        phi = np.zeros((nconv, self.group * self.N), dtype=complex)        
+        keff = np.zeros(nret, dtype=complex)
+        phi = np.zeros((nret, self.group * self.N), dtype=complex)        
 
-        for i in range(nconv):
+        for i in range(min(nconv, nev)):
             eigval = eps.getEigenvalue(i)
             keff[i] = eigval
-            lamda[i] = 1/eigval
             print(f"Eigenmode {i}: keff = {keff[i]:.5f}, |eigval| = {abs(eigval):.5e}")
 
             v = A.createVecRight()
@@ -121,6 +124,9 @@ class PowerMethodSolver1D:
             phi_i = arr.copy()
 
             v.destroy()
+           
+            if np.sum(phi_i) < 0:
+                phi_i *= -1
 
             phi_i /= np.max(np.abs(phi_i))  # normalize
             phi[i, :] = phi_i 
