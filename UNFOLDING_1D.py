@@ -83,9 +83,6 @@ def main():
 ###### BRUTE FORCE METHOD
 #    dPHI_BRUTE, dS_unfold_BRUTE = main_unfold_1D_brute(dPHI_meas, dPHI, S, G_matrix, group, N, output_dir, case_name, x)
 #
-##### GREEDY METHOD
-    dPHI_GREEDY, dS_unfold_GREEDY = main_unfold_1D_greedy_new(dPHI_meas, dPHI, S, G_matrix, group, N, output_dir, case_name, x)
-
 ##### GREEDY_OPTIMIZED METHOD
     dPHI_GREEDY, dS_unfold_GREEDY = main_unfold_1D_greedy_optimized(dPHI_meas, dPHI, S, G_matrix, group, N, output_dir, case_name, x)
 
