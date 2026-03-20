@@ -103,18 +103,13 @@ matrix_builder = MatrixBuilderForward1D(group, N, TOT, SIGS, BC, dx, D, chi, NUF
 M, F = matrix_builder.build_forward_matrices()
 
 # Solve
-solver = SolverFactory.get_solver_power1D(solver_type, group, N, M, F, x, precond, tol=1E-10, eigenmodes=1)
+solver = SolverFactory.get_solver_power1D(solver_type, group, N, M, F, x, precond, tol=1E-10, eigenmodes=2)
 keff, PHI = solver.solve()
 
 # Post-processing
-dim = len(PHI)
-
-for d in range(dim):
-    keff_fun = keff[d].real
-    PHI_reshaped = np.reshape(PHI[d], (group, N))
-    PostProcessor.save_output_power1D(output_dir, case_name, keff_fun, PHI_reshaped, solver_type)
-    for g in range(group):
-        Utils.plot_1D_power(solver_type, PHI_reshaped[g].real, x, g, output_dir=output_dir, varname=f'PHI_mode{d}', case_name=case_name, title=f'1D Plot of PHI{g+1}')
+PostProcessor.save_output_power1D(output_dir, case_name, keff, PHI, solver_type, group, N)
+#    for g in range(group):
+#        Utils.plot_1D_power(solver_type, PHI_reshaped[g].real, x, g, output_dir=output_dir, varname=f'PHI_mode{d}', case_name=case_name, title=f'1D Plot of PHI{g+1}')
     
 ########################################################################################################
 ## NOISE SIMULATION

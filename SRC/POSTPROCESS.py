@@ -3,14 +3,28 @@ import json
 
 class PostProcessor:
     @staticmethod
-    def save_output_power1D(output_dir, case_name, keff, phi_reshape, solver_type):
-        output = {"keff": keff}
-        for g in range(len(phi_reshape)):
-            phi_groupname = f'PHI{g + 1}_{solver_type.upper()}'
-            output[phi_groupname] = [val.real for val in phi_reshape[g]]
+    def save_output_power1D(output_dir, case_name, keff, phi, solver_type, group, N):
+        if isinstance(keff, float):
+            phi_reshape = np.reshape(phi, (group, N))
+            output = {"keff": keff}
+            for g in range(len(phi_reshape)):
+                phi_groupname = f'PHI{g + 1}_{solver_type.upper()}'
+                output[phi_groupname] = [val.real for val in phi_reshape[g]]
 
-        with open(f'{output_dir}/{case_name}_{solver_type.upper()}/{case_name}_{solver_type.upper()}_output.json', 'w') as json_file:
-            json.dump(output, json_file, indent=4)
+            with open(f'{output_dir}/{case_name}_{solver_type.upper()}/{case_name}_{solver_type.upper()}_output.json', 'w') as json_file:
+                json.dump(output, json_file, indent=4)
+        elif isinstance(keff, (list, np.ndarray)):
+            dim = len(keff)
+            print(dim)
+            phi_reshape = np.reshape(phi, (dim, group, N))
+            for d in range(dim):
+                output = {"keff": keff[d].real}
+                for g in range(len(phi_reshape[d])):
+                    phi_groupname = f'PHI{g + 1}_{solver_type.upper()}'
+                    output[phi_groupname] = [val.real for val in phi_reshape[d][g]]
+
+                with open(f'{output_dir}/{case_name}_{solver_type.upper()}/{case_name}_{solver_type.upper()}_mode{d}_output.json', 'w') as json_file:
+                    json.dump(output, json_file, indent=4)
 
     @staticmethod
     def save_output_fixed1D(output_dir, case_name, dPHI_reshaped, solver_type):
