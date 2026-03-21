@@ -125,27 +125,6 @@ def main_unfold_1D_solve(PHI, G_matrix, dPHI, keff, group, N, TOT, SIGS, BC, dx,
     dS_unfold_SOLVE = np.dot(G_inverse, dPHI_SOLVE)
     dS_unfold_SOLVE_reshaped = np.reshape(dS_unfold_SOLVE,(group,N))
 
-    # Plot the results
-    plt.figure(figsize=(8, 6))
-    plt.imshow(G_matrix.real, cmap='viridis', interpolation='nearest', origin='lower')
-    plt.colorbar(label='Magnitude of G_matrix')
-    plt.xlabel('Index')
-    plt.ylabel('Index')
-    plt.gca().invert_yaxis()
-    plt.title('Plot of the Magnitude of G_matrix')
-    plt.savefig(f'{output_dir}/{case_name}_02_SOLVE/{case_name}_G_matrix.png')
-    plt.close()
-
-    plt.figure(figsize=(8, 6))
-    plt.imshow(G_inverse.real, cmap='viridis', interpolation='nearest', origin='lower')
-    plt.colorbar(label='Magnitude of G_inverse')
-    plt.xlabel('Index')
-    plt.ylabel('Index')
-    plt.gca().invert_yaxis()
-    plt.title('Plot of the Magnitude of G_inverse')
-    plt.savefig(f'{output_dir}/{case_name}_02_SOLVE/{case_name}_G_inverse.png')
-    plt.close()
-
     plt.figure()
     for g in range(group):
         plt.clf()
@@ -158,6 +137,7 @@ def main_unfold_1D_solve(PHI, G_matrix, dPHI, keff, group, N, TOT, SIGS, BC, dx,
         plt.grid(True)
         plt.savefig(f'{output_dir}/{case_name}_02_SOLVE/{case_name}_02_SOLVE_abs_G{g+1}.png')
         plt.clf()
+
         plt.plot(x, np.angle(dPHI_reshaped[g]), 'b-', label=f'Group {g+1} - Direct')
         plt.plot(x, np.angle(dPHI_SOLVE_reshaped[g]), 'r--', label=f'Group {g+1} - Green')
         plt.xlabel('height (cm)')
@@ -167,6 +147,7 @@ def main_unfold_1D_solve(PHI, G_matrix, dPHI, keff, group, N, TOT, SIGS, BC, dx,
         plt.grid(True)
         plt.savefig(f'{output_dir}/{case_name}_02_SOLVE/{case_name}_02_SOLVE_phase_G{g+1}.png')
         plt.clf()
+
         plt.plot(x, dPHI_reshaped[g].real, 'b-', label=f'Group {g+1} - Direct')
         plt.plot(x, dPHI_SOLVE_reshaped[g].real, 'r--', label=f'Group {g+1} - Green')
         plt.xlabel('height (cm)')
@@ -176,6 +157,7 @@ def main_unfold_1D_solve(PHI, G_matrix, dPHI, keff, group, N, TOT, SIGS, BC, dx,
         plt.grid(True)
         plt.savefig(f'{output_dir}/{case_name}_02_SOLVE/{case_name}_02_SOLVE_real_G{g+1}.png')
         plt.clf()
+
         plt.plot(x, np.abs(S_reshaped[g]), 'b-', label=f'Group {g+1} - dS Input')
         plt.plot(x, np.abs(dS_unfold_SOLVE_reshaped[g]), 'r--', label=f'Group {g+1} - dS Unfold')
         plt.xlabel('height (cm)')
@@ -232,30 +214,6 @@ def main_unfold_1D_invert(dPHI_meas, dPHI, S, G_matrix, group, N, map_detector, 
     # Plot dPHI_zero_reshaped
     dPHI_meas_reshaped = np.reshape(dPHI_meas, (group, N)) #3D array, size (group, J_max, I_max)
 
-    # Plotting of the neutron noise induced by the noise source #1 in the frequency domain
-    for g in range(group):
-        plt.figure()
-        plt.plot(x, np.abs(dPHI_reshaped[g])/np.max(np.abs(dPHI_reshaped[0])), 'g-', label=f'Group {g+1} - dPHI_sol')
-        plt.plot(x, np.abs(dPHI_meas_reshaped[g])/np.max(np.abs(dPHI_reshaped[0])), 'r--', label=f'Group {g+1} - dPHI_meas')
-        plt.legend()
-        plt.ylabel('Normalized amplitude of the induced neutron noise')
-        plt.title(f'Magnitude of neutron noise - Group {g+1}')
-        plt.xlabel('Distance from core centre [cm]')
-        plt.grid()
-        plt.savefig(f'{output_dir}/{case_name}_03_INVERT/{case_name}_dPHI_meas_magnitude_G{g+1}.png')
-        plt.close()
-    for g in range(group):
-        plt.figure()
-        plt.plot(x, np.degrees(np.angle(dPHI_reshaped[g])), 'g-', label=f'Group {g+1} - dPHI_sol')
-        plt.plot(x, np.degrees(np.angle(dPHI_meas_reshaped[g])), 'r--', label=f'Group {g+1} - dPHI_meas')
-        plt.legend()
-        plt.ylabel('Phase of the induced neutron noise')
-        plt.title(f'Phase of neutron noise - Group {g+1}')
-        plt.xlabel('Distance from core centre [cm]')
-        plt.grid()
-        plt.savefig(f'{output_dir}/{case_name}_03_INVERT/{case_name}_dPHI_meas_phase_G{g+1}.png')
-        plt.close()
-
     # --------------- INTERPOLATE dPHI -------------------
     # Create a copy to avoid modifying the original array
     dPHI_interp = interpolate_dPHI_rbf_1D(dPHI_meas, group, N, map_detector, rbf_function='thin_plate_spline')
@@ -278,6 +236,7 @@ def main_unfold_1D_invert(dPHI_meas, dPHI, S, G_matrix, group, N, map_detector, 
         plt.grid()
         plt.savefig(f'{output_dir}/{case_name}_03_INVERT/{case_name}_dPHI_interp_magnitude_G{g+1}.png')
         plt.close()
+        
     for g in range(group):
         plt.figure()
         plt.plot(x, np.degrees(np.angle(dPHI_reshaped[g])), 'g-', label=f'Group {g+1} - dPHI_sol')
@@ -381,33 +340,9 @@ def main_unfold_1D_scan(dPHI_meas, dPHI, S, G_matrix, group, N, map_detector, ou
     delta_all_full = delta_all
     delta_all_full_plot = np.reshape(delta_all_full, (group, N))  # 3D array, size (group, J_max, I_max)
 
-    # Plotting of the neutron noise induced by the noise source #1 in the frequency domain
-    for g in range(group):
-        plt.figure()
-        plt.plot(x, np.abs(delta_all_full_plot[g]), 'g-', label=f'Group {g+1} - delta_all')
-        plt.legend()
-        plt.ylabel('Normalized amplitude of the scanning delta')
-        plt.title(f'Magnitude of scanning delta - Group {g+1}')
-        plt.xlabel('Distance from core centre [cm]')
-        plt.grid()
-        plt.savefig(f'{output_dir}/{case_name}_05_SCAN/{case_name}_delta_all_G{g+1}.png')
-        plt.close()
-
     # Flatten dPHI_sol_temp_groups to a 1D list
     delta_all_full_inv = [1/x if x != 0 else np.inf for x in delta_all]
     delta_all_full_inv_plot = np.reshape(delta_all_full_inv, (group, N))  # 3D array, size (group, J_max, I_max)
-
-    # Plotting of the neutron noise induced by the noise source #1 in the frequency domain
-    for g in range(group):
-        plt.figure()
-        plt.plot(x, np.abs(delta_all_full_inv_plot[g]), 'g-', label=f'Group {g+1} - delta_all_inv')
-        plt.legend()
-        plt.ylabel('Normalized amplitude of the inverse scanning delta')
-        plt.title(f'Magnitude of inverse scanning delta - Group {g+1}')
-        plt.xlabel('Distance from core centre [cm]')
-        plt.grid()
-        plt.savefig(f'{output_dir}/{case_name}_05_SCAN/{case_name}_delta_all_inv_G{g+1}.png')
-        plt.close()
 
     # Find minimum value and index
     min_value = min(delta_all)

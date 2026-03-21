@@ -144,8 +144,6 @@ def main():
 #        dPHI_temp_BRUTE, dS_unfold_BRUTE_temp = main_unfold_3D_hexx_brute(dPHI_temp_meas, dPHI_temp, S, G_matrix, group, K_max, N_hexx, conv_tri, output_dir, case_name, tri_indices, x, y, z)
 #
 #### GREEDY METHOD
-#    dPHI_temp_GREEDY, dS_unfold_GREEDY_temp = main_unfold_3D_hexx_greedy(dPHI_temp_meas, dPHI_temp, S, G_matrix, group, K_max, N_hexx, conv_tri, output_dir, case_name, tri_indices, x, y, z)
-    dPHI_temp_GREEDY, dS_unfold_GREEDY_temp = main_unfold_3D_hexx_greedy_new(dPHI_temp_meas, dPHI_temp, S, G_matrix, group, K_max, N_hexx, conv_tri, output_dir, case_name, tri_indices, x, y, z)
     dPHI_temp_GREEDY, dS_unfold_GREEDY_temp = main_unfold_3D_hexx_greedy_optimized(dPHI_temp_meas, dPHI_temp, S, G_matrix, group, K_max, N_hexx, conv_tri, output_dir, case_name, tri_indices, x, y, z)
 
     ####################################################################################################
